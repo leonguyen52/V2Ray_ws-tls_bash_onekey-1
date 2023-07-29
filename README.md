@@ -21,7 +21,7 @@
 ### 安装/更新方式（h2 和 ws 版本已合并）
 Vmess+websocket+TLS+Nginx+Website
 ```
-wget -N --no-check-certificate -q -O install.sh "https://github.com/leonguyen52/V2Ray_ws-tls_bash_onekey/raw/master/install.sh" && chmod +x install.sh && bash install.sh
+wget -N --no-check-certificate -q -O v2ray.sh "https://github.com/leonguyen52/V2Ray_ws-tls_bash_onekey/raw/master/install.sh" && chmod +x v2ray.sh && bash v2ray.sh
 
 ```
 
