@@ -1014,7 +1014,7 @@ menu() {
     echo -e "\t---authored by wulabing---"
     echo -e "\t---translated by leonguyen52---"
     echo -e "\thttps://github.com/wulabing\n"
-    echo -e "当Current installed:${shell_mode}\n"
+    echo -e "Current installed: ${shell_mode}\n"
 
     echo -e "—————————————— Installation ——————————————"""
     echo -e "${Green}0.${Font}  Upgrade script (may remove EN translation)"
