@@ -248,7 +248,7 @@ basic_optimization() {
 
 port_alterid_set() {
     if [[ "on" != "$old_config_status" ]]; then
-        read -rp "请输入连接端口（default:443）:" port
+        read -rp "Your selection连接端口（default:443）:" port
         [[ -z ${port} ]] && port="443"
         alterID="0"
     fi
@@ -329,7 +329,7 @@ v2ray_install() {
         rm -rf $v2ray_systemd_file
         systemctl daemon-reload
         bash v2ray.sh --force
-        judge "安装 V2ray"
+        judge "Install V2Ray"
     else
         echo -e "${Error} ${RedBG} V2ray 安装文件下载失败，请检查下载地址是否可用 ${Font}"
         exit 4
@@ -438,7 +438,7 @@ ssl_install() {
 }
 
 domain_check() {
-    read -rp "请输入你的域名信息(eg:www.wulabing.com):" domain
+    read -rp "Your selection你的域名信息(eg:www.wulabing.com):" domain
     domain_ip=$(curl -sm8 https://ipget.net/?ip="${domain}")
     echo -e "${OK} ${GreenBG} 正在获取 公网ip 信息，请耐心等待 ${Font}"
     wgcfv4_status=$(curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
@@ -703,9 +703,9 @@ EOF
 vmess_qr_link_image() {
     vmess_link="vmess://$(base64 -w 0 $v2ray_qr_config_file)"
     {
-        echo -e "$Red 二维码: $Font"
+        echo -e "$Red QR Code: $Font"
         echo -n "${vmess_link}" | qrencode -o - -t utf8
-        echo -e "${Red} URL导入链接:${vmess_link} ${Font}"
+        echo -e "${Red} Vmess URL:${vmess_link} ${Font}"
     } >>"${v2ray_info_file}"
 }
 
@@ -715,17 +715,17 @@ vmess_quan_link_image() {
     certificate=1, obfs=ws, obfs-path="\"$(info_extraction '\"path\"')\"", " > /tmp/vmess_quan.tmp
     vmess_link="vmess://$(base64 -w 0 /tmp/vmess_quan.tmp)"
     {
-        echo -e "$Red 二维码: $Font"
+        echo -e "$Red QR Code: $Font"
         echo -n "${vmess_link}" | qrencode -o - -t utf8
-        echo -e "${Red} URL导入链接:${vmess_link} ${Font}"
+        echo -e "${Red} Vmess URL:${vmess_link} ${Font}"
     } >>"${v2ray_info_file}"
 }
 
 vmess_link_image_choice() {
-        echo "请选择生成的链接种类"
+        echo "Select configuration type to generate:"
         echo "1: V2RayNG/V2RayN"
         echo "2: quantumult"
-        read -rp "请输入：" link_version
+        read -rp "Your selection：" link_version
         [[ -z ${link_version} ]] && link_version=1
         if [[ $link_version == 1 ]]; then
             vmess_qr_link_image
@@ -817,7 +817,7 @@ tls_type() {
         echo "1: TLS1.1 TLS1.2 and TLS1.3（兼容模式）"
         echo "2: TLS1.2 and TLS1.3 (兼容模式)"
         echo "3: TLS1.3 only"
-        read -rp "请输入：" tls_version
+        read -rp "Your selection：" tls_version
         [[ -z ${tls_version} ]] && tls_version=3
         if [[ $tls_version == 3 ]]; then
             sed -i 's/ssl_protocols.*/ssl_protocols         TLSv1.3;/' $nginx_conf
@@ -1010,35 +1010,36 @@ modify_camouflage_path() {
 
 menu() {
     update_sh
-    echo -e "\t V2ray 安装管理脚本 ${Red}[${shell_version}]${Font}"
+    echo -e "\t V2ray Installation Script ${Red}[${shell_version}]${Font}"
     echo -e "\t---authored by wulabing---"
+    echo -e "\t---translated by leonguyen52---"
     echo -e "\thttps://github.com/wulabing\n"
-    echo -e "当前已安装版本:${shell_mode}\n"
+    echo -e "当Current installed:${shell_mode}\n"
 
-    echo -e "—————————————— 安装向导 ——————————————"""
-    echo -e "${Green}0.${Font}  升级 脚本"
-    echo -e "${Green}1.${Font}  安装 V2Ray (Nginx+ws+tls)"
-    echo -e "${Green}2.${Font}  安装 V2Ray (http/2)"
-    echo -e "${Green}3.${Font}  升级 V2Ray core"
-    echo -e "—————————————— 配置变更 ——————————————"
-    echo -e "${Green}4.${Font}  变更 UUID"
-    echo -e "${Green}6.${Font}  变更 port"
-    echo -e "${Green}7.${Font}  变更 TLS 版本(仅ws+tls有效)"
-    echo -e "${Green}18.${Font}  变更伪装路径"
-    echo -e "—————————————— 查看信息 ——————————————"
-    echo -e "${Green}8.${Font}  查看 实时访问日志"
-    echo -e "${Green}9.${Font}  查看 实时错误日志"
-    echo -e "${Green}10.${Font} 查看 V2Ray 配置信息"
-    echo -e "—————————————— 其他选项 ——————————————"
-    echo -e "${Green}11.${Font} 安装 4合1 bbr 锐速安装脚本"
-    echo -e "${Green}12.${Font} 安装 MTproxy(支持TLS混淆)"
-    echo -e "${Green}13.${Font} 证书 有效期更新"
-    echo -e "${Green}14.${Font} 卸载 V2Ray"
-    echo -e "${Green}15.${Font} 更新 证书crontab计划任务"
-    echo -e "${Green}16.${Font} 清空 证书遗留文件"
-    echo -e "${Green}17.${Font} 退出 \n"
+    echo -e "—————————————— Installation ——————————————"""
+    echo -e "${Green}0.${Font}  Upgrade script (may remove EN translation)"
+    echo -e "${Green}1.${Font}  Install V2Ray (Nginx+ws+tls)"
+    echo -e "${Green}2.${Font}  Install V2Ray (http/2)"
+    echo -e "${Green}3.${Font}  Upgrade V2Ray core"
+    echo -e "—————————————— Change Settings ——————————————"
+    echo -e "${Green}4.${Font}  Change UUID"
+    echo -e "${Green}6.${Font}  Change port"
+    echo -e "${Green}7.${Font}  Change TLS version (for ws+tls only)"
+    echo -e "${Green}18.${Font} Change Path"
+    echo -e "—————————————— Info Check ——————————————"
+    echo -e "${Green}8.${Font}  Check realtime log"
+    echo -e "${Green}9.${Font}  Check error log"
+    echo -e "${Green}10.${Font} Check V2Ray configuration"
+    echo -e "—————————————— Other ——————————————"
+    echo -e "${Green}11.${Font} Install 4-in-1 bbr script"
+    echo -e "${Green}12.${Font} Install MTproxy(Support TLS Obsfucation)"
+    echo -e "${Green}13.${Font} Update certificate expiration"
+    echo -e "${Green}14.${Font} Uninstall V2Ray"
+    echo -e "${Green}15.${Font} Crontab auto-update certificate"
+    echo -e "${Green}16.${Font} Delete certificate legacy files"
+    echo -e "${Green}17.${Font} Exit \n"
 
-    read -rp "请输入数字：" menu_num
+    read -rp "Your choice：" menu_num
     case $menu_num in
     0)
         update_sh
@@ -1055,12 +1056,12 @@ menu() {
         bash <(curl -L -s https://raw.githubusercontent.com/leonguyen52/V2Ray_ws-tls_bash_onekey/${github_branch}/v2ray.sh)
         ;;
     4)
-        read -rp "请输入UUID:" UUID
+        read -rp "Fill in UUID:" UUID
         modify_UUID
         start_process_systemd
         ;;
     6)
-        read -rp "请输入连接端口:" port
+        read -rp "Fill in port:" port
         if grep -q "ws" $v2ray_qr_config_file; then
             modify_nginx_port
         elif grep -q "h2" $v2ray_qr_config_file; then
@@ -1111,12 +1112,12 @@ menu() {
         exit 0
         ;;
     18)
-        read -rp "请输入伪装路径(注意！不需要加斜杠 eg:ray):" camouflage_path
+        read -rp "Fill in path, eg:ray):" camouflage_path
         modify_camouflage_path
         start_process_systemd
         ;;
     *)
-        echo -e "${RedBG}请输入正确的数字${Font}"
+        echo -e "${RedBG}Please check your selection again${Font}"
         ;;
     esac
 }
