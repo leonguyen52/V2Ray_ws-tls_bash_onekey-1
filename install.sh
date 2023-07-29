@@ -1013,7 +1013,8 @@ menu() {
     echo -e "\t V2ray Installation Script ${Red}[${shell_version}]${Font}"
     echo -e "\t---authored by wulabing---"
     echo -e "\t---translated by leonguyen52---"
-    echo -e "\thttps://github.com/wulabing\n"
+    echo -e "\thttps://github.com/wulabing"
+    echo -e "\thttps://github.com/leonguyen52/V2Ray_ws-tls_bash_onekey\n"
     echo -e "Current installed: ${shell_mode}\n"
 
     echo -e "—————————————— Installation ——————————————"""
@@ -1031,7 +1032,7 @@ menu() {
     echo -e "${Green}9.${Font}  Check error log"
     echo -e "${Green}10.${Font} Check V2Ray configuration"
     echo -e "—————————————— Other ——————————————"
-    echo -e "${Green}11.${Font} Install 4-in-1 bbr script"
+    echo -e "${Green}11.${Font} Install 4-in-1 BBR script (Chinese)"
     echo -e "${Green}12.${Font} Install MTproxy(Support TLS Obsfucation)"
     echo -e "${Green}13.${Font} Update certificate expiration"
     echo -e "${Green}14.${Font} Uninstall V2Ray"
